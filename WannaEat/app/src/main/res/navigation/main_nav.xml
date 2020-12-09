@@ -5,6 +5,8 @@
     android:id="@+id/main_nav"
     app:startDestination="@id/listFragment">
 
+
+
     <fragment
         android:id="@+id/listFragment"
         android:name="com.wannaeat.fragments.ListFragment"
@@ -29,4 +31,5 @@
         android:name="com.wannaeat.fragments.DetailFragment"
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail" />
+
 </navigation>

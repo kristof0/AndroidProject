@@ -9,11 +9,11 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.model.LatLng
 import com.wannaeat.Injection
 import com.wannaeat.R
@@ -39,7 +39,7 @@ class DetailFragment : Fragment() {
     private lateinit var phone:TextView
     private lateinit var web:TextView
     private  lateinit var image:ImageView
-    private  lateinit var map: MapView
+
 
 
 
@@ -47,16 +47,20 @@ class DetailFragment : Fragment() {
                                savedInstanceState: Bundle?): View? {
 
         var view=inflater.inflate(R.layout.fragment_detail, container, false)
+
         viewModel = ViewModelProviders.of(this, this.context?.let { Injection.provideViewModelFactory(it) })
                 .get(SearchRepositoriesViewModel::class.java)
 
-         map=view.findViewById<MapView>(R.id.detail_mapView)
-        map.onCreate(Bundle())
+        //map=view.findViewById<MapView>(R.id.detail_mapView)
+
         return view
     }
+    init {
 
+    }
     override fun onStart() {
         super.onStart()
+
         repo= SearchRepositoriesViewModel.selectedRepo!!
         name= requireView().findViewById(R.id.detail_name)
         address= requireView().findViewById(R.id.detail_address)
@@ -75,12 +79,19 @@ class DetailFragment : Fragment() {
             requireView().context.startActivity(intent)
         }
 
+        //toMaps.setOnClickListener{ view?.let { it1 -> Navigation.findNavController(it1).navigate(R.id.navToMaps) } }
         Glide.with(this.image)
                 .load(repo.image_url)
                 .into(image)
 
+        val fm: FragmentManager = childFragmentManager
+        val mMapFragment: MapFragment = MapFragment.newInstance(repo.lat,repo.lng)
+        val fragmentTransaction: FragmentTransaction = fm.beginTransaction()
+        fragmentTransaction.add(R.id.detail_mapFrag, mMapFragment)
+        fragmentTransaction.commit()
+        fm.executePendingTransactions()
 
-        val camPos = CameraUpdateFactory.newLatLng(LatLng(repo.lat, repo.lng))
+
 
 
 

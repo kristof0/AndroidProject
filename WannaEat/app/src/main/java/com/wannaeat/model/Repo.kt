@@ -43,4 +43,5 @@ data class Repo (
         @field:SerializedName("reserve_url")  val reserve_url:String,
         @field:SerializedName("mobile_reserve_url") val mobile_reserve_url:String,
         @field:SerializedName("image_url") val image_url:String
+
 )

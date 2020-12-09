@@ -82,9 +82,7 @@ fun searchRepos(
   Retrofit.
  */
 interface OpenTableService {
-    /**
-     * Get repos ordered by stars.
-     */
+
     @GET("restaurants")
     fun searchRepos(
         @Query("city") query: String,

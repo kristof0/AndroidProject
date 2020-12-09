@@ -63,7 +63,7 @@
         app:layout_constraintTop_toBottomOf="@+id/repo_address"
         tools:ignore="RtlCompat" />
 
-    <ImageView
+    <!--<ImageView
         android:id="@+id/star"
         android:layout_width="35dp"
         android:layout_height="35dp"
@@ -72,7 +72,7 @@
         android:src="@drawable/ic_star"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/repo_address" />
+        app:layout_constraintTop_toBottomOf="@+id/repo_address" />-->
 
     <ImageView
         android:id="@+id/repo_imageView"
@@ -82,6 +82,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/ic_menu_gallery" />
+
+    <CheckBox
+        android:id="@+id/repo_check"
+        android:layout_width="85dp"
+        android:layout_height="38dp"
+        android:layout_marginVertical="@dimen/row_item_margin_vertical"
+        android:src="@drawable/ic_star"
+        android:text="Favorite"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/repo_address" />
     android:adjustViewBounds="true" />
 
 

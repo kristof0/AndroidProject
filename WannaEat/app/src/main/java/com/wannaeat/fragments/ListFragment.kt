@@ -26,7 +26,7 @@ import com.wannaeat.R
 import com.wannaeat.model.Repo
 import com.wannaeat.ui.ReposAdapter
 import com.wannaeat.ui.SearchRepositoriesViewModel
-import kotlinx.android.synthetic.main.activity_search_repositories.*
+
 import kotlinx.android.synthetic.main.fragment_list.emptyList
 import kotlinx.android.synthetic.main.fragment_list.search_repo
 import kotlinx.android.synthetic.main.fragment_list.view.*
@@ -51,8 +51,11 @@ class ListFragment : Fragment() {
         // add dividers between RecyclerView's row items
         val decoration = DividerItemDecoration(this.context, DividerItemDecoration.VERTICAL)
         recyclerView.addItemDecoration(decoration)
+
         initAdapter()
+
         val query = if (LAST_SEARCH_QUERY.length>0 ) LAST_SEARCH_QUERY else DEFAULT_QUERY
+
         viewModel.searchRepo(query)
         initSearch(query)
         viewModel.repos

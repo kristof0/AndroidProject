@@ -16,23 +16,16 @@
 
 package com.wannaeat.ui
 
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.wannaeat.Injection
-import com.wannaeat.MainActivity
 import com.wannaeat.R
-import com.wannaeat.fragments.DetailFragment
 import com.wannaeat.model.Repo
 
 
@@ -45,6 +38,8 @@ class RepoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val address: TextView = view.findViewById(R.id.repo_address)
     private val imageView:ImageView=view.findViewById(R.id.repo_imageView)
     private val price: TextView = view.findViewById(R.id.repo_price)
+    private val checked: CheckBox = view.findViewById(R.id.repo_check)
+
     private lateinit var viewModel: SearchRepositoriesViewModel
 
     private var repo: Repo? = null
