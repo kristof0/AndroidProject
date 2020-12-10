@@ -37,7 +37,7 @@ class OpenTableRepository (
         Log.d("OpenTableRepository ", "New query: $query")
 
         // Get data source factory from the local cache
-        val dataSourceFactory = cache.reposByName(query)
+        val dataSourceFactory = cache.restaurantsByCity(query)
         val repoBoundaryCallback = RepoBoundaryCallback(query, service, cache)
         val networkErrors = repoBoundaryCallback.networkErrors
 

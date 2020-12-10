@@ -35,6 +35,6 @@ interface RepoDao {
     // Do a similar query as the search API:
     // Look for repos that contain the query string in the name or in the description
     // and order those results descending, by the number of stars and then by name
-    @Query("SELECT * FROM restaurants WHERE city LIKE :queryString  ")
-    fun reposByName(queryString: String): DataSource.Factory<Int, Repo>
+    @Query("SELECT * FROM restaurant_table WHERE city LIKE :queryString  ")
+    fun restaurantsByCity(queryString: String): DataSource.Factory<Int, Repo>
 }

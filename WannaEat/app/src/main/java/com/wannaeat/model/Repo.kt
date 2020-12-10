@@ -26,7 +26,7 @@ import com.google.gson.annotations.SerializedName
  * with the serialized name.
  * This class also defines the Room repos table, where the repo [id] is the primary key.
  */
-@Entity(tableName = "restaurants")
+@Entity(tableName = "restaurant_table")
 data class Repo (
         @PrimaryKey @field:SerializedName("id") val id:Int,
         @field:SerializedName("name") val name:String,
@@ -43,5 +43,6 @@ data class Repo (
         @field:SerializedName("reserve_url")  val reserve_url:String,
         @field:SerializedName("mobile_reserve_url") val mobile_reserve_url:String,
         @field:SerializedName("image_url") val image_url:String
+
 
 )
