@@ -38,7 +38,7 @@ class RepoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val address: TextView = view.findViewById(R.id.repo_address)
     private val imageView:ImageView=view.findViewById(R.id.repo_imageView)
     private val price: TextView = view.findViewById(R.id.repo_price)
-    private val checked: CheckBox = view.findViewById(R.id.repo_check)
+    private val favCheck: CheckBox = view.findViewById(R.id.repo_favCheck)
 
     private lateinit var viewModel: SearchRepositoriesViewModel
 

@@ -51,7 +51,7 @@ class DetailFragment : Fragment() {
         viewModel = ViewModelProviders.of(this, this.context?.let { Injection.provideViewModelFactory(it) })
                 .get(SearchRepositoriesViewModel::class.java)
 
-        //map=view.findViewById<MapView>(R.id.detail_mapView)
+
 
         return view
     }
@@ -79,7 +79,7 @@ class DetailFragment : Fragment() {
             requireView().context.startActivity(intent)
         }
 
-        //toMaps.setOnClickListener{ view?.let { it1 -> Navigation.findNavController(it1).navigate(R.id.navToMaps) } }
+
         Glide.with(this.image)
                 .load(repo.image_url)
                 .into(image)

@@ -30,6 +30,7 @@ class MapFragment : SupportMapFragment() {
 
         googleMap.addMarker(MarkerOptions().position(restaurant).title("The restaurant`s place"))
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(restaurant))
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(restaurant,12f))
     }
     private var lat:Double = 0.0
     private var lng:Double = 0.0
