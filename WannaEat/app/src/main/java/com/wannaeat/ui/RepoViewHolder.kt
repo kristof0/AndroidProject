@@ -38,10 +38,12 @@ import com.wannaeat.model.Repo
  */
 class RepoViewHolder(view: View, private val viewModel: SearchRepositoriesViewModel) : RecyclerView.ViewHolder(view) {
 
+    private var favorite: Int=0
     private val name: TextView = view.findViewById(R.id.repo_name)
     private val address: TextView = view.findViewById(R.id.repo_address)
     private val imageView: ImageView = view.findViewById(R.id.repo_imageView)
     private val price: TextView = view.findViewById(R.id.repo_price)
+    //favorite check
     private val favCheck: CheckBox = view.findViewById(R.id.repo_favCheck)
 
 
@@ -54,6 +56,13 @@ class RepoViewHolder(view: View, private val viewModel: SearchRepositoriesViewMo
             SearchRepositoriesViewModel.selectedRepo = repo
             Navigation.findNavController(view).navigate(R.id.detailFragment)
         }
+        favCheck.setOnCheckedChangeListener(){ compoundButton: CompoundButton, b: Boolean ->
+            if(favorite==0){favorite=1}else{favorite=0}
+            val changer=favorite==1
+            favCheck.isChecked=b
+            repo?.let { viewModel.updateRestaurant(it.id) }
+
+        }
 
     }
 
@@ -61,7 +70,6 @@ class RepoViewHolder(view: View, private val viewModel: SearchRepositoriesViewMo
         if (repo == null) {
             val resources = itemView.resources
             name.text = resources.getString(R.string.loading)
-
 
         } else {
             showRepoData(repo)
@@ -71,13 +79,14 @@ class RepoViewHolder(view: View, private val viewModel: SearchRepositoriesViewMo
     private fun showRepoData(repo: Repo) {
 
         this.repo = repo
-        name.text = repo.name
 
+        this.favorite=repo.favorite
 
         // set address
         var addressVisibility = View.GONE
         if (repo.address != null) {
-            address.text = repo.address
+            val resources = this.itemView.context.resources
+            address.text = resources.getString(R.string.addressAndCity,repo.address,repo.city)
             addressVisibility = View.VISIBLE
         }
         address.visibility = addressVisibility
@@ -86,7 +95,6 @@ class RepoViewHolder(view: View, private val viewModel: SearchRepositoriesViewMo
         // set name
         var nameVisibility = View.GONE
         if (!repo.name.isNullOrEmpty()) {
-            val resources = this.itemView.context.resources
             name.text = repo.name
             nameVisibility = View.VISIBLE
         }
@@ -102,8 +110,8 @@ class RepoViewHolder(view: View, private val viewModel: SearchRepositoriesViewMo
         }
         price.visibility = priceVisibility
 
-        //star
-        favCheck.isChecked = repo.favorite == 1
+
+       // favCheck.isChecked = favorite==1
 
 
         //inserting image

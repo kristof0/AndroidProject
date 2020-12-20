@@ -63,16 +63,7 @@
         app:layout_constraintTop_toBottomOf="@+id/repo_address"
         tools:ignore="RtlCompat" />
 
-    <!--<ImageView
-        android:id="@+id/star"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginVertical="@dimen/row_item_margin_vertical"
-        android:layout_marginTop="13dp"
-        android:src="@drawable/ic_star"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/repo_address" />-->
+
 
     <ImageView
         android:id="@+id/repo_imageView"

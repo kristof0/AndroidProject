@@ -37,7 +37,7 @@ interface RepoDao {
 
 
     //update if it`s added to favorites
-    @Query("UPDATE restaurant_table SET favorite = CASE WHEN FAVORITE = 1 THEN 0 ELSE 1 END WHERE id=:id")
+    @Query("UPDATE restaurant_table SET favorite = CASE WHEN favorite = 1 THEN 0 ELSE 1 END WHERE id=:id")
     fun updateRestaurants(id: Int)
 
     //get the favorites
