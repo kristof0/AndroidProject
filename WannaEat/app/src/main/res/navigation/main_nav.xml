@@ -11,13 +11,10 @@
         android:id="@+id/listFragment"
         android:name="com.wannaeat.fragments.ListFragment"
         android:label="fragment_list"
-        tools:layout="@layout/fragment_list">
-        <action
-            android:id="@+id/navToDetails"
-            app:destination="@id/detailFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_list"/>
+
     <fragment
-        android:id="@+id/favoriteFragment"
+        android:id="@+id/favoritesFragment"
         android:name="com.wannaeat.fragments.FavoriteFragment"
         android:label="fragment_favorite"
         tools:layout="@layout/fragment_favorite" />

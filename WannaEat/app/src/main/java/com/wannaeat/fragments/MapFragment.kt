@@ -11,8 +11,6 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
 
-
-
 class MapFragment : SupportMapFragment() {
     private val callback = OnMapReadyCallback { googleMap ->
         /**
@@ -30,10 +28,10 @@ class MapFragment : SupportMapFragment() {
 
         googleMap.addMarker(MarkerOptions().position(restaurant).title("The restaurant`s place"))
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(restaurant))
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(restaurant,12f))
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(restaurant, 12f))
     }
-    private var lat:Double = 0.0
-    private var lng:Double = 0.0
+    private var lat: Double = 0.0
+    private var lng: Double = 0.0
     override fun onCreateView(arg0: LayoutInflater, arg1: ViewGroup?, arg2: Bundle?): View? {
         val v: View? = super.onCreateView(arg0, arg1, arg2)
         initMap()
@@ -45,10 +43,10 @@ class MapFragment : SupportMapFragment() {
     }
 
     companion object {
-        fun newInstance(lat:Double,lng:Double): MapFragment {
+        fun newInstance(lat: Double, lng: Double): MapFragment {
             val frag = MapFragment()
-            frag.lat=lat
-            frag.lng=lng
+            frag.lat = lat
+            frag.lng = lng
             return frag
         }
     }

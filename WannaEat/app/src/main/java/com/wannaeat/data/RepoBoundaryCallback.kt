@@ -31,7 +31,7 @@ class RepoBoundaryCallback(
         if (isRequestInProgress) return
 
         isRequestInProgress = true
-        searchRepos(service, query,NETWORK_PAGE_SIZE,lastRequestedPage, { repos ->
+        searchRepos(service, query, NETWORK_PAGE_SIZE, lastRequestedPage, { repos ->
             cache.insert(repos) {
                 lastRequestedPage++
                 isRequestInProgress = false

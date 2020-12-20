@@ -21,6 +21,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import android.content.Context
 import com.wannaeat.model.Repo
+import com.wannaeat.model.User
 
 /**
  * Database schema that holds the list of repos.

@@ -17,10 +17,7 @@
 package com.wannaeat.db
 
 import androidx.paging.DataSource
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.wannaeat.model.Repo
 
 /**
@@ -37,4 +34,15 @@ interface RepoDao {
     // and order those results descending, by the number of stars and then by name
     @Query("SELECT * FROM restaurant_table WHERE city LIKE :queryString  ")
     fun restaurantsByCity(queryString: String): DataSource.Factory<Int, Repo>
+
+
+    //update if it`s added to favorites
+    @Query("UPDATE restaurant_table SET favorite = CASE WHEN FAVORITE = 1 THEN 0 ELSE 1 END WHERE id=:id")
+    fun updateRestaurants(id: Int)
+
+    //get the favorites
+    @Query("SELECT * FROM restaurant_table WHERE favorite=1 ")
+    fun getFavorites(): DataSource.Factory<Int, Repo>
+
+
 }

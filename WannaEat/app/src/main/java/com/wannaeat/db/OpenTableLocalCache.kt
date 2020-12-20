@@ -26,8 +26,8 @@ import java.util.concurrent.Executor
  * correct executor.
  */
 class OpenTableLocalCache(
-    private val repoDao: RepoDao,
-    private val ioExecutor: Executor
+        private val repoDao: RepoDao,
+        private val ioExecutor: Executor
 ) {
 
     /**
@@ -51,5 +51,15 @@ class OpenTableLocalCache(
         // appending '%' so we can allow other characters to be before and after the query string
         val query = "%${name.replace(' ', '%')}%"
         return repoDao.restaurantsByCity(query)
+    }
+
+    fun getFavorites(): DataSource.Factory<Int, Repo> {
+        return repoDao.getFavorites()
+    }
+
+    // add/remove  favorite status
+    fun updateRestaurants(id: Int) {
+        Log.d("OpenTableLocalCache", "Update")
+        repoDao.updateRestaurants(id)
     }
 }

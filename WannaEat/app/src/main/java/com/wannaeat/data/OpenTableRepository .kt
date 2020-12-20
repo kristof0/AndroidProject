@@ -17,9 +17,12 @@
 package com.wannaeat.data
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
 import com.wannaeat.api.OpenTableService
 import com.wannaeat.db.OpenTableLocalCache
+import com.wannaeat.model.Repo
 import com.wannaeat.model.RepoSearchResult
 
 /**
@@ -47,6 +50,21 @@ class OpenTableRepository (
                 .build()
 
         return RepoSearchResult(data, networkErrors)
+    }
+
+    fun getFavorites(): LiveData<PagedList<Repo>> {
+        val dataSourceFactory=cache.getFavorites()
+
+        val data = LivePagedListBuilder(dataSourceFactory, DATABASE_PAGE_SIZE)
+                .build()
+
+        return data
+
+    }
+
+    fun updateRestaurants(id:Int){
+        Log.d("OpenTableRepository ","Update  favorites")
+        cache.updateRestaurants(id)
     }
 
     companion object {

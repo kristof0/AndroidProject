@@ -9,8 +9,8 @@ import retrofit2.http.QueryName
 
 interface UserDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(user: User)
+    suspend fun addUser(user: User)
 
     @Query("SELECT * FROM user_table WHERE (email LIKE :queryName) AND (password LIKE :queryPassw) ")
-    fun getUser(queryName: String , queryPassw:String):User
+    fun getUser(queryName: String, queryPassw: String): User
 }

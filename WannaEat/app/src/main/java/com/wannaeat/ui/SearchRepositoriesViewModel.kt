@@ -16,17 +16,17 @@
 
 package com.wannaeat.ui
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import androidx.paging.PagedList
 import com.wannaeat.data.OpenTableRepository
+import com.wannaeat.db.OpenTableLocalCache
 import com.wannaeat.model.Repo
 import com.wannaeat.model.RepoSearchResult
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 /**
- * ViewModel for the [SearchRepositoriesActivity] screen.
+ *
  * The ViewModel works with the [OpenTableRepository ] to get the data.
  */
 class SearchRepositoriesViewModel(private val repository: OpenTableRepository ) : ViewModel() {
@@ -35,13 +35,15 @@ class SearchRepositoriesViewModel(private val repository: OpenTableRepository ) 
     private val repoResult: LiveData<RepoSearchResult> = Transformations.map(queryLiveData) {
         repository.search(it)
     }
-
     val repos: LiveData<PagedList<Repo>> = Transformations.switchMap(repoResult) { it -> it.data }
-
     val networkErrors: LiveData<String> = Transformations.switchMap(repoResult) { it ->
         it.networkErrors
     }
-   // var selectedRepo:Repo=null!!
+
+     val repoResultFavorite: LiveData<PagedList<Repo>> = repository.getFavorites()
+
+
+
 
     /**
      * Search a repository based on a query string.
@@ -55,6 +57,18 @@ class SearchRepositoriesViewModel(private val repository: OpenTableRepository ) 
      */
 
     fun lastQueryValue(): String? = queryLiveData.value
+
+    fun updateRestaurant(id:Int){
+        viewModelScope.launch(Dispatchers.IO){
+            repository.updateRestaurants(id)
+        }
+    }
+    fun getFavorites(): LiveData<PagedList<Repo>> {
+
+        return repository.getFavorites()
+
+    }
+
     companion object{
         public var selectedRepo: Repo? = null
     }

@@ -22,6 +22,7 @@ import com.wannaeat.api.OpenTableService
 import com.wannaeat.data.OpenTableRepository
 import com.wannaeat.db.OpenTableLocalCache
 import com.wannaeat.db.RepoDatabase
+import com.wannaeat.fragments.ListFragment
 import com.wannaeat.ui.ViewModelFactory
 import java.util.concurrent.Executors
 

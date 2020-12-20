@@ -12,6 +12,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_layout)
         this.supportActionBar?.hide()
+        //navigationview that handles the fragments on the main activity
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         val navController = findNavController(R.id.navHostController)
         bottomNavigationView.setupWithNavController(navController)

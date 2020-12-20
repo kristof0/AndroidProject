@@ -20,11 +20,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
+import android.widget.CompoundButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.wannaeat.Injection
 import com.wannaeat.R
 import com.wannaeat.model.Repo
 
@@ -32,32 +36,32 @@ import com.wannaeat.model.Repo
 /**
  * View Holder for a [Repo] RecyclerView list item.
  */
-class RepoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+class RepoViewHolder(view: View, private val viewModel: SearchRepositoriesViewModel) : RecyclerView.ViewHolder(view) {
 
     private val name: TextView = view.findViewById(R.id.repo_name)
     private val address: TextView = view.findViewById(R.id.repo_address)
-    private val imageView:ImageView=view.findViewById(R.id.repo_imageView)
+    private val imageView: ImageView = view.findViewById(R.id.repo_imageView)
     private val price: TextView = view.findViewById(R.id.repo_price)
     private val favCheck: CheckBox = view.findViewById(R.id.repo_favCheck)
 
-    private lateinit var viewModel: SearchRepositoriesViewModel
 
     private var repo: Repo? = null
 
     init {
-        //viewModel=ViewModelProviders.of(Fragment(), view.context?.let { Injection.provideViewModelFactory(it) }).get(SearchRepositoriesViewModel::class.java)
+
+
         view.setOnClickListener {
-            SearchRepositoriesViewModel.selectedRepo=repo
-            Navigation.findNavController(view).navigate(R.id.navToDetails)
+            SearchRepositoriesViewModel.selectedRepo = repo
+            Navigation.findNavController(view).navigate(R.id.detailFragment)
         }
+
     }
 
     fun bind(repo: Repo?) {
         if (repo == null) {
             val resources = itemView.resources
             name.text = resources.getString(R.string.loading)
-            //description.visibility = View.GONE
-            //language.visibility = View.GONE
+
 
         } else {
             showRepoData(repo)
@@ -66,10 +70,11 @@ class RepoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     private fun showRepoData(repo: Repo) {
 
-       this.repo = repo
+        this.repo = repo
         name.text = repo.name
 
-        // if the description is missing, hide the TextView
+
+        // set address
         var addressVisibility = View.GONE
         if (repo.address != null) {
             address.text = repo.address
@@ -78,7 +83,7 @@ class RepoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         address.visibility = addressVisibility
 
 
-        // if the language is missing, hide the label and the value
+        // set name
         var nameVisibility = View.GONE
         if (!repo.name.isNullOrEmpty()) {
             val resources = this.itemView.context.resources
@@ -87,6 +92,8 @@ class RepoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         }
         name.visibility = nameVisibility
 
+
+        //set price
         var priceVisibility = View.GONE
         if (!repo.price.toString().isNullOrEmpty()) {
             val resources = this.itemView.context.resources
@@ -95,6 +102,11 @@ class RepoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         }
         price.visibility = priceVisibility
 
+        //star
+        favCheck.isChecked = repo.favorite == 1
+
+
+        //inserting image
         Glide.with(this.itemView)
                 .load(repo.image_url)
                 .into(imageView)
@@ -102,10 +114,11 @@ class RepoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     }
 
     companion object {
-        fun create(parent: ViewGroup): RepoViewHolder {
+        fun create(parent: ViewGroup, viewModel: SearchRepositoriesViewModel): RepoViewHolder {
             val view = LayoutInflater.from(parent.context)
                     .inflate(R.layout.repo_view_item, parent, false)
-            return RepoViewHolder(view)
+
+            return RepoViewHolder(view, viewModel)
         }
     }
 }

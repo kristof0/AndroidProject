@@ -24,10 +24,10 @@ import com.wannaeat.model.Repo
 /**
  * Adapter for the list of repositories.
  */
-class ReposAdapter : PagedListAdapter<Repo, androidx.recyclerview.widget.RecyclerView.ViewHolder>(REPO_COMPARATOR) {
-
+class ReposAdapter(viewModel: SearchRepositoriesViewModel) : PagedListAdapter<Repo, androidx.recyclerview.widget.RecyclerView.ViewHolder>(REPO_COMPARATOR) {
+    val viewModel = viewModel
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {
-        return RepoViewHolder.create(parent)
+        return RepoViewHolder.create(parent, viewModel)
     }
 
     override fun onBindViewHolder(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
@@ -42,7 +42,7 @@ class ReposAdapter : PagedListAdapter<Repo, androidx.recyclerview.widget.Recycle
             override fun areItemsTheSame(oldItem: Repo, newItem: Repo): Boolean =
                     oldItem == newItem
 
-           override fun areContentsTheSame(oldItem: Repo, newItem: Repo): Boolean =
+            override fun areContentsTheSame(oldItem: Repo, newItem: Repo): Boolean =
                     oldItem == newItem
         }
     }

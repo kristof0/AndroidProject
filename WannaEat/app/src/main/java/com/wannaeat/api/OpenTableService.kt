@@ -94,7 +94,7 @@ interface OpenTableService {
     ): Call<RepoSearchResponse>
 
     companion object {
-        private const val BASE_URL = "https://opentable.herokuapp.com/api/"
+        private const val BASE_URL = "https://ratpark-api.imok.space/"
 
         fun create(): OpenTableService {
             val logger = HttpLoggingInterceptor()

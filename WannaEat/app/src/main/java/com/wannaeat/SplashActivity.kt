@@ -6,10 +6,14 @@ import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.ViewModelProviders
+import com.wannaeat.fragments.ListFragment
 import com.wannaeat.fragments.MapFragment
+import com.wannaeat.ui.SearchRepositoriesViewModel
 
 
 class SplashActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.splash_layout)
@@ -20,6 +24,6 @@ class SplashActivity : AppCompatActivity() {
             val intent= Intent(this@SplashActivity,MainActivity::class.java)
             startActivity(intent)
             finish()
-        },1000)
+        },1800)
     }
 }
